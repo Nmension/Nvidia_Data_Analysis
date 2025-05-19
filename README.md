@@ -12,42 +12,42 @@
 #### Data Source:
   - Structured and semi-structured data is collected from:
 
-        SEC filings (10-K, 10-Q)
+      SEC filings (10-K, 10-Q)
 
-        Public company financial statements
+      Public company financial statements
 
-        Open financial APIs and databases
+      Open financial APIs and databases
 
 ####  Database Storage:
   - Data is stored in a PostgreSQL relational database, designed to allow structured queries across various tables:
 
     - **quarterly_financials** 
 
-            → quarterly data for all segments as one, including: revenue, operating income, taxes and interests, COGS, OPEX, etc
+      → quarterly data for all segments as one, including: revenue, operating income, taxes and interests, COGS, OPEX, etc
 
     - **quarterly_revenue_per_activity** 
 
-            → quarterly revenue by segments
+      → quarterly revenue by segments
 
-    - **yearly_financials** (_table filled by the the bash script using quarterly financials for calculations_)
+    - **yearly_financials** (_filled by the bash script using quarterly financials for calculations_)
 
-            → yearly data for all segments as one, including: revenue, operating income, taxes and interests, COGS, OPEX, etc
+      → yearly data for all segments as one, including: revenue, operating income, taxes and interests, COGS, OPEX, etc
 
     - **yearly_financials_extra**
 
-            → complementary yearly financial data, including: total assets &liabilities, net debt, average stock price, etc
+      → complementary yearly financial data, including: total assets &liabilities, net debt, average stock price, etc
 
-    - **valuations**
+    - **valuations** (_filled by the bash script_)
 
-            → includes: equity value per share, average market cap, enterprise value
+      → includes: equity value per share, average market cap, enterprise value
 
     - **shares_numbers_in_million**
 
-            → includes: treasury stock, total outstanding, insiders, top 3 institutions & the rest of shares
+      → includes: treasury stock, total outstanding, insiders, top 3 institutions & the rest of shares
 
     - **activities** & **quarters_per_year**
 
-            → two junction tables
+      → junction tables
 
 ## 🛠️ Bash Script: **manage_data.sh** (500+ lines)
 
@@ -57,23 +57,23 @@ A comprehensive CLI tool built to facilitate non-technical user interaction with
 
   - Data Exportation Guidance
 
-        Prompts users to target one or more table(s) then from their selection, for partial or total data extraction 
+      - Prompts users to target one or more table(s) then from their selection, for partial or total data extraction 
 
-        Outputs clean .csv files ready for analysis
+      - Outputs clean .csv files ready for analysis
 
   - Database Auto-Update
 
-        Checks latest entry in specific tables, then 
+      - Checks latest entry in specific tables, then 
 
-        Calculates missing data from pre-defined database endpoints
+      - Calculates missing data from pre-defined database endpoints
 
-        Executes SQL INSERT/UPDATE statements with conflict handling
+      - Executes SQL INSERT/UPDATE statements with conflict handling
 
   - Data Insertion Guidance
 
-        Provides step-by-step support for data entry
+      - Provides step-by-step support for data entry
 
-        Helps to respect schema adherence and formatting
+      - Helps to respect schema adherence and formatting
 
 ## 📊 Python Analytics Environment
 
@@ -90,7 +90,7 @@ A comprehensive CLI tool built to facilitate non-technical user interaction with
 
 #### Outputs:
 
-  - Time-series plots (Revenue vs Net Income, FCF vs SBC, etc.)
+  - Key time-series plots and tables (Revenue vs Net Income, FCF vs SBC, etc.)
 
   - Sectoral breakdowns and cost structure visualizations
 
@@ -99,9 +99,9 @@ A comprehensive CLI tool built to facilitate non-technical user interaction with
 ## 🧪 Analysis Flow
 
 #### Data Extraction
-  csv format export from PostgreSQL via Bash or SQL queries
+  - csv format export from PostgreSQL via Bash or SQL queries
 
-  Here's an example of prompt I used to generate a file called: _quarterly_financials.csv_
+      - Here's an example of prompt I used to generate a file called: _quarterly_financials.csv_
 
 ```bash
 psql -X --csv -U postgres -d nvidia -c "SELECT quarter, year, revenue, operating_income,net_income, gross_margin_percentage, taxes_and_interests, cost_of_goods_sold, gross_profit, operating_expenses, cogs_opex_difference FROM quarters_per_year INNER JOIN quarterly_financials USING(yq_id);" > quarterly_financials.csv
@@ -109,10 +109,10 @@ psql -X --csv -U postgres -d nvidia -c "SELECT quarter, year, revenue, operating
     
 
 #### Exploratory Data Analysis (EDA)
-    Data cleaning, derived KPIs, outlier detection in Jupyter
+  - Data cleaning, derived KPIs, outlier detection, descriptive statistics in Jupyter
 
 #### Financial Modeling & Visualization
-    Multiple perspectives consideration (business efficiency, valuation, systemic risk)
+  - Multiple perspectives consideration (business efficiency, valuation, systemic risk)
 
 ## 🔁 Reproducibility
 
