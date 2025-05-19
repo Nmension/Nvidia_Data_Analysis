@@ -1,4 +1,4 @@
-# Nvidia_Data_Analysis
+# Nvidia: Economic & Financial Data Analysis
 📘 Project Documentation: Financial Bubble Assessment – **Nvidia**
 </br>
 
