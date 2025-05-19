@@ -12,11 +12,11 @@
 #### Data Source:
   - Structured and semi-structured data is collected from:
 
-      SEC filings (10-K, 10-Q)
+      - SEC filings (10-K, 10-Q)
 
-      Public company financial statements
+      - Public company financial statements
 
-      Open financial APIs and databases
+      - Open financial APIs and databases
 
 ####  Database Storage:
   - Data is stored in a PostgreSQL relational database, designed to allow structured queries across various tables:
@@ -101,7 +101,7 @@ A comprehensive CLI tool built to facilitate non-technical user interaction with
 #### Data Extraction
   - csv format export from PostgreSQL via Bash or SQL queries
 
-      - Here's an example of prompt I used to generate a file called: _quarterly_financials.csv_
+       Here's an example of prompt I used to generate a file called: _quarterly_financials.csv_
 
 ```bash
 psql -X --csv -U postgres -d nvidia -c "SELECT quarter, year, revenue, operating_income,net_income, gross_margin_percentage, taxes_and_interests, cost_of_goods_sold, gross_profit, operating_expenses, cogs_opex_difference FROM quarters_per_year INNER JOIN quarterly_financials USING(yq_id);" > quarterly_financials.csv
